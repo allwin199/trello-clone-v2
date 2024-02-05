@@ -13,15 +13,15 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
 
     const login = async (email: string, password: string) => {
-        const session = await account.createEmailSession(email, password);
-        const user = await account.get();
+        // const session = await account.createEmailSession(email, password);
+        // const user = await account.get();
 
         setEmail("");
         setPassword("");
 
         // router.push("/");
 
-        console.log("User", user);
+        // console.log("User", user);
         // setLoggedInUser(await account.get());
     };
 
