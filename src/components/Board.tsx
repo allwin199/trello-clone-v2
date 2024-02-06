@@ -17,7 +17,49 @@ const Board = () => {
 
     // console.log("Board", board);
 
-    const handleOnDragEnd = (result: DropResult) => {};
+    const handleOnDragEnd = (result: DropResult) => {
+        const { destination, source, type } = result;
+
+        if (!destination) {
+            return;
+        }
+
+        const columns = Array.from(board.columns);
+        const startColIndex = columns[Number(source.droppableId)];
+        const finishedColIndex = columns[Number(destination.droppableId)];
+
+        const startCol: Column = {
+            id: startColIndex[0],
+            todos: startColIndex[1].todos,
+        };
+
+        const finishedCol: Column = {
+            id: startColIndex[0],
+            todos: startColIndex[1].todos,
+        };
+
+        if (!startCol || !finishedCol) {
+            return;
+        }
+
+        if (source.index === destination.index && startCol === finishedCol) {
+            return;
+        }
+
+        const newTodos = startCol.todos;
+        const [todoMoved] = newTodos.splice(source.index, 1);
+
+        if (startCol.id == finishedCol.id) {
+            newTodos.splice(source.index, 0, todoMoved);
+            const newCol = {
+                id: startCol.id,
+                todos: newTodos,
+            };
+            const newColumns = new Map(board.columns);
+            newColumns.set(startCol.id, newCol);
+        } else {
+        }
+    };
 
     return (
         <div className="mt-10">
